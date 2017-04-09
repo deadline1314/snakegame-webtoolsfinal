@@ -1,3 +1,22 @@
+@import '../node_modules/fullpage.js/dist/jquery.fullpage.css';
+
+/* Custom CSS
+ * --------------------------------------- */
+body {
+  font-family: arial, helvetica;
+  color: #333;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 6em;
+}
+
+.section {
+  text-align: center;
+}
+
+
 .post-editor {
     margin: 1em 20%
 }
