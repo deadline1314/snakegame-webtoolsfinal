@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "firebase": "^3.7.5",
+    "fullpage.js": "^2.9.4",
     "jquery": "^3.2.1",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
