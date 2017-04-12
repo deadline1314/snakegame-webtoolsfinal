@@ -14,7 +14,6 @@ class ThreadDisplay extends Component {
     this.state = {
       posts: [],
     };
-
   }
 
   componentWillMount() {

@@ -9,7 +9,8 @@ import $ from 'jquery';
 import 'fullpage.js';
 
 import './App.css';
-import ThreadDisplay from "./component/ThreadDisplay";
+import ThreadDisplay from "./Divs/ThreadDisplayDiv/component/ThreadDisplay";
+import SnakeGameDiv from './Divs/SnakeGameDiv/SnakeGameDiv';
 
 class App extends Component {
 
@@ -24,10 +25,8 @@ class App extends Component {
       storageBucket: "reacttest-a0dd3.appspot.com",
       messagingSenderId: "901167334752"
     };
-
     this.app = firebase.initializeApp(config);
     this.database = this.app.database();
-
   }
 
   componentDidMount() {
@@ -46,7 +45,7 @@ class App extends Component {
       </div>
 
       <div className="section" id="section2">
-        <h1>No wraps, no extra markup</h1>
+        <SnakeGameDiv />
       </div>
 
       <div className="section" id="section3">
@@ -54,7 +53,7 @@ class App extends Component {
       </div>
 
       <div className="section" id="section4">
-        <div className="slide ">
+        <div className="slide">
           <h1>Simple Demo</h1>
         </div>
         <div className="slide active">
