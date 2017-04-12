@@ -49,7 +49,7 @@ class SnakeGameDiv extends Component {
     document.getElementById("txt").innerHTML = "Game Over";
   }
 
-  //bind arrow keys to the snake action
+  //bind control keys to the snake action
   bindArrowKeysAndPreventDefault(){
     let self = this;
     window.addEventListener("keydown", function(e) {
