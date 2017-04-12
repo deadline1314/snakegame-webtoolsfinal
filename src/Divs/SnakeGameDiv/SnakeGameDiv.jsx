@@ -33,12 +33,13 @@ class SnakeGameDiv extends Component {
     if(this.state.gameState.state === "going"){
       window.clearInterval(this.interval);
       this.state.gameState.state = "paused";
-      document.getElementById("txt").innerHTML = "Paused.</br>Press the 'W','S','A','D' to start.";
+      document.getElementById("txt").innerHTML = "Paused.</br>Press the 'W',S','A','D' to start.";
     }
   }
   newGame(){
     this.setState({gameState : new GameState(size,this.onLose,this.onScore)});
     window.clearInterval(this.interval);
+    document.getElementById("txt").innerHTML = "Press the 'W',S','A','D' to start.";
   }
   onScore(){
     document.getElementById("score").innerHTML = this.state.gameState.score;
@@ -52,16 +53,16 @@ class SnakeGameDiv extends Component {
   bindArrowKeysAndPreventDefault(){
     let self = this;
     window.addEventListener("keydown", function(e) {
-      //arrow keys
+      //"A","D","S","W" keys to control the direction
       if([65, 68, 83, 87].indexOf(e.keyCode) > -1) {
         e.preventDefault();
         self.state.gameState.keyPressed(e.keyCode);
         self.keyPressed();
       }
-      //space
-      if(32 === e.keyCode) {
+      //keyboard "P" to pause
+      if(80 === e.keyCode) {
         e.preventDefault();
-
+        self.pause();
       }
     }, false);
   }
@@ -69,6 +70,7 @@ class SnakeGameDiv extends Component {
     if(this.state.gameState.state === "notStarted" || this.state.gameState.state === "paused"){
       this.state.gameState.state = "going";
       this.startGame();
+      document.getElementById("txt").innerHTML = "Press 'P' to Pause.";
     }
   }
   startGame(){
@@ -87,7 +89,7 @@ class SnakeGameDiv extends Component {
         <button type="button" onClick={this.pause}>Pause</button>
         <p>Score: <span id="score">0</span></p>
         <Grid fieldTypes={FIELDTYPES} map={this.state.gameState.map}/>
-        <p id="txt">Press the arrow to start.</p>
+        <p id="txt">Press the 'W','S','A','D' to start.</p>
       </div>)
   }
 }
