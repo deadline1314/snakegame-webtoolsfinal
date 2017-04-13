@@ -32,7 +32,7 @@ class App extends Component {
 
   componentDidMount() {
     $('#fullpage').fullpage({
-      sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe', '#ccddff']
+      sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe']
     });
   }
 
@@ -51,23 +51,6 @@ class App extends Component {
 
       <div className="section" id="section3">
         <ThreadDisplay database={this.app.database()} />
-      </div>
-
-
-
-      <div className="section" id="section4">
-        <div className="slide">
-          <h1>Simple Demo</h1>
-        </div>
-        <div className="slide active">
-          <h1>Only text</h1>
-        </div>
-        <div className="slide">
-          <h1>And text</h1>
-        </div>
-        <div className="slide">
-          <h1>And more text</h1>
-        </div>
       </div>
 
     </div>

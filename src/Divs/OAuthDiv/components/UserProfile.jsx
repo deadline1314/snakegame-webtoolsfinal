@@ -9,7 +9,7 @@ const UserProfile = ({
       <li>
         <img
           alt="this is a pic"
-          width="32"
+          width="100"
           src={user.photoURL}
         />
       </li>

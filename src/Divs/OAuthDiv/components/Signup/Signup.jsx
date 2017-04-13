@@ -22,9 +22,9 @@ const Signup = ({
         <button onClick={onSignupAuth}>
           Signup
         </button>
-        <button onClick={jumpToLogin}>
-          Login
-        </button>
+      </li>
+      <li>
+        <p>Already Have An Account? <a onClick={jumpToLogin}>Log In Here!</a></p>
       </li>
     </ul>
   )

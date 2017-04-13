@@ -20,9 +20,9 @@ const Login = ({
         <button onClick={onEmailAuth}>
           Login
         </button>
-        <button onClick={jumpToSignup}>
-          Signup
-        </button>
+      </li>
+      <li>
+        <p>New User? <a onClick={jumpToSignup}>Sign Up Here!</a></p>
       </li>
       <li>
         <button onClick={onGoogleAuth}>
