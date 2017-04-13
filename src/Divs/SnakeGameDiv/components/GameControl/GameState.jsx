@@ -195,7 +195,7 @@ function generateInitialSnake() {
   snake.add([1,2]);
   snake.add([1,1]);
   return snake;
-};
+}
 
 //generate the boarder of the map
 function generateWalls(size) {
@@ -209,7 +209,7 @@ function generateWalls(size) {
     }
   }
   return walls
-};
+}
 
 //generate the initial state of map
 function generateInitialMap(size) {
@@ -225,7 +225,7 @@ function generateInitialMap(size) {
     rows.push(row);
   }
   return rows;
-};
+}
 
 //get new coords when snake moves
 function getNewCoords(coords, direction) {
@@ -242,7 +242,7 @@ function getNewCoords(coords, direction) {
     result[0] += 1;
   }
   return result;
-};
+}
 
 
 

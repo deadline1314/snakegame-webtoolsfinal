@@ -9,8 +9,9 @@ import $ from 'jquery';
 import 'fullpage.js';
 
 import './App.css';
-import ThreadDisplay from "./Divs/ThreadDisplayDiv/component/ThreadDisplay";
+import ThreadDisplay from "./Divs/ThreadDisplayDiv/ThreadDisplayDiv";
 import SnakeGameDiv from './Divs/SnakeGameDiv/SnakeGameDiv';
+import OAuthDiv from './Divs/OAuthDiv/OAuthDiv';
 
 class App extends Component {
 
@@ -41,7 +42,7 @@ class App extends Component {
     <div id="fullpage">
 
       <div className="section active" id="section1">
-        <h1>fullPage.js</h1>
+        <OAuthDiv />
       </div>
 
       <div className="section" id="section2">
@@ -51,6 +52,8 @@ class App extends Component {
       <div className="section" id="section3">
         <ThreadDisplay database={this.app.database()} />
       </div>
+
+
 
       <div className="section" id="section4">
         <div className="slide">

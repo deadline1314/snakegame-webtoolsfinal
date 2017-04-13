@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Post from './Post';
-import PostEditor from './PostEditor';
+import Post from './components/Post';
+import PostEditor from './components/PostEditor';
 
 class ThreadDisplay extends Component {
 
