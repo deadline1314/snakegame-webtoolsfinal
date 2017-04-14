@@ -10,7 +10,7 @@ const FIELDTYPES = {
   snake: 3
 };
 const size = 20;
-
+let submitFlag = true;
 
 class SnakeGameDiv extends Component {
   constructor(props){
@@ -19,9 +19,10 @@ class SnakeGameDiv extends Component {
     this.pause = this.pause.bind(this);
     this.newGame = this.newGame.bind(this);
     this.onScore = this.onScore.bind(this);
+
     this.state = {
       gameState : new GameState(size,this.onLose,this.onScore),
-      user: null
+      score: 0
     };
   }
 
@@ -30,9 +31,18 @@ class SnakeGameDiv extends Component {
   }
 
   onTick(){
-
     this.state.gameState.onTick();
     this.setState(this.state);
+    if(submitFlag && this.state.gameState.state === "end") {
+      let gs = this.state.gameState.score;
+      this.setState({
+        score: gs
+      });
+      console.log(gs);
+      console.log(this);
+      this.props.onChangeGameScore(gs);
+      submitFlag = false;
+    }
   }
   pause(){
     if(this.state.gameState.state === "going"){
@@ -43,10 +53,14 @@ class SnakeGameDiv extends Component {
     }
   }
   newGame(){
-    this.setState({gameState : new GameState(size,this.onLose,this.onScore)});
+    this.setState({
+      gameState : new GameState(size,this.onLose,this.onScore),
+      score: 0
+    });
     window.clearInterval(this.interval);
     document.getElementById("txt").innerHTML = "Press the 'W',S','A','D' to start.";
   }
+
   onScore(){
     document.getElementById("score").innerHTML = this.state.gameState.score;
   }
@@ -72,11 +86,10 @@ class SnakeGameDiv extends Component {
   }
 
   keyPressed(){
-
     if(this.state.gameState.state === "notStarted" || this.state.gameState.state === "paused"){
-      let gs = this.state.gameState;  // TODO: Clean this
+      let gs = this.state.gameState;
       gs.state='going';
-      //this.state.gameState.state = "going";
+
       this.startGame();
       document.getElementById("txt").innerHTML = "Press 'P' to Pause.";
     }
@@ -87,8 +100,8 @@ class SnakeGameDiv extends Component {
     this.interval = window.setInterval(()=>{
       this.onTick();
     },150);
+    submitFlag = true;
   }
-
 
   render() {
     return (

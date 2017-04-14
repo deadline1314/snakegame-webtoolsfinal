@@ -30,13 +30,14 @@ class App extends Component {
     this.database = this.app.database();
 
     this.state = {
-      userGlobal: null
+      userGlobal: null, // user
+      scoreGlobal: 0   // score to submit to database
     };
     this.onChangeUserStatus = this.onChangeUserStatus.bind(this);
+    this.onChangeGameScore = this.onChangeGameScore.bind(this);
   }
 
   componentDidMount() {
-
     //initial the color for the fullPage.js
     $('#fullpage').fullpage({
       sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe']
@@ -47,7 +48,13 @@ class App extends Component {
      this.setState({
        userGlobal:value
      })
-     //console.log(this.state.userGlobal);
+   }
+   //handle game score changes from <SnakeGameDiv /> every time the game stopped
+   onChangeGameScore(value) {
+    this.setState({
+      scoreGlobal:value
+    });
+     console.log(this.state.scoreGlobal);
    }
 
   render() {
@@ -55,11 +62,14 @@ class App extends Component {
     <div id="fullpage">
 
       <div className="section active" id="section1">
-        <OAuthDiv  onChangeUserStatus={this.onChangeUserStatus}/>
+        <OAuthDiv  onChangeUserStatus={this.onChangeUserStatus} />
       </div>
 
       <div className="section" id="section2">
-        <SnakeGameDiv  user={this.state.userGlobal}/>
+        <SnakeGameDiv
+          user={this.state.userGlobal}
+          onChangeGameScore={this.onChangeGameScore}
+        />
       </div>
 
       <div className="section" id="section3">
