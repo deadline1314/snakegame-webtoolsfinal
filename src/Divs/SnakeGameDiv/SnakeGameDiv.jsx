@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SnakeGameDiv.css';
 import Grid from './components/Grid/Grid';
-import GameState from './components/GameControl/GameState';
+import GameState from './components/GameControlLogic/GameState';
 
 const FIELDTYPES = {
   floor: 0,
@@ -30,7 +30,7 @@ class SnakeGameDiv extends Component {
   }
 
   onTick(){
-    console.log(this.state.gameState);
+
     this.state.gameState.onTick();
     this.setState(this.state);
   }
@@ -56,7 +56,7 @@ class SnakeGameDiv extends Component {
   }
 
   onBindChange(e, user) {
-    console.log(user);
+
     if( user ) {
       if([65, 68, 83, 87].indexOf(e.keyCode) > -1) {
         e.preventDefault();
@@ -72,7 +72,7 @@ class SnakeGameDiv extends Component {
   }
 
   keyPressed(){
-    console.log(this.state.gameState);
+
     if(this.state.gameState.state === "notStarted" || this.state.gameState.state === "paused"){
       let gs = this.state.gameState;  // TODO: Clean this
       gs.state='going';
@@ -104,17 +104,3 @@ class SnakeGameDiv extends Component {
 }
 
 export default SnakeGameDiv;
-
-
-// function onBindChange(e) {
-//   if([65, 68, 83, 87].indexOf(e.keyCode) > -1) {
-//     e.preventDefault();
-//     this.state.gameState.keyPressed(e.keyCode);
-//     this.keyPressed();
-//   }
-//   //keyboard "P" to pause
-//   if(80 === e.keyCode) {
-//     e.preventDefault();
-//     this.pause();
-//   }
-// }
