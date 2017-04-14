@@ -26,10 +26,14 @@ class OAuthDiv extends Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
-        this.setState({user: user})
+        this.setState({user: user});
+        this.props.onChangeUserStatus(user);
+        //this.props.user = user;
       }
       else {
-        this.setState({user: null})
+        this.setState({user: null});
+        this.props.onChangeUserStatus(user);
+        //this.props.user = null;
       }
     })
   }

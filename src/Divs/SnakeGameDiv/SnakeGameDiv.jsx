@@ -20,19 +20,25 @@ class SnakeGameDiv extends Component {
     this.newGame = this.newGame.bind(this);
     this.onScore = this.onScore.bind(this);
     this.state = {
-      gameState : new GameState(size,this.onLose,this.onScore)
+      gameState : new GameState(size,this.onLose,this.onScore),
+      user: null
     };
-    this.bindArrowKeysAndPreventDefault();
+  }
+
+  componentWillMount() {
+    window.addEventListener("keydown", (e) => { this.onBindChange(e, this.props.user)}, false);
   }
 
   onTick(){
+    console.log(this.state.gameState);
     this.state.gameState.onTick();
     this.setState(this.state);
   }
   pause(){
     if(this.state.gameState.state === "going"){
       window.clearInterval(this.interval);
-      this.state.gameState.state = "paused";
+      let gs = this.state.gameState;
+      gs.state = "paused";
       document.getElementById("txt").innerHTML = "Paused.</br>Press the 'W',S','A','D' to start.";
     }
   }
@@ -49,26 +55,28 @@ class SnakeGameDiv extends Component {
     document.getElementById("txt").innerHTML = "Game Over";
   }
 
-  //bind control keys to the snake action
-  bindArrowKeysAndPreventDefault(){
-    let self = this;
-    window.addEventListener("keydown", function(e) {
-      //"A","D","S","W" keys to control the direction
+  onBindChange(e, user) {
+    console.log(user);
+    if( user ) {
       if([65, 68, 83, 87].indexOf(e.keyCode) > -1) {
         e.preventDefault();
-        self.state.gameState.keyPressed(e.keyCode);
-        self.keyPressed();
+        this.state.gameState.keyPressed(e.keyCode);
+        this.keyPressed();
       }
       //keyboard "P" to pause
       if(80 === e.keyCode) {
         e.preventDefault();
-        self.pause();
+        this.pause();
       }
-    }, false);
+    }
   }
+
   keyPressed(){
+    console.log(this.state.gameState);
     if(this.state.gameState.state === "notStarted" || this.state.gameState.state === "paused"){
-      this.state.gameState.state = "going";
+      let gs = this.state.gameState;  // TODO: Clean this
+      gs.state='going';
+      //this.state.gameState.state = "going";
       this.startGame();
       document.getElementById("txt").innerHTML = "Press 'P' to Pause.";
     }
@@ -81,9 +89,10 @@ class SnakeGameDiv extends Component {
     },150);
   }
 
+
   render() {
     return (
-      <div className="snakeGame">
+      <div className="snakeGame" >
         <h1>Snake</h1>
         <button type="button" onClick={this.newGame}>New Game</button>
         <button type="button" onClick={this.pause}>Pause</button>
@@ -95,3 +104,17 @@ class SnakeGameDiv extends Component {
 }
 
 export default SnakeGameDiv;
+
+
+// function onBindChange(e) {
+//   if([65, 68, 83, 87].indexOf(e.keyCode) > -1) {
+//     e.preventDefault();
+//     this.state.gameState.keyPressed(e.keyCode);
+//     this.keyPressed();
+//   }
+//   //keyboard "P" to pause
+//   if(80 === e.keyCode) {
+//     e.preventDefault();
+//     this.pause();
+//   }
+// }

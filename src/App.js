@@ -28,25 +28,38 @@ class App extends Component {
     };
     this.app = firebase.initializeApp(config);
     this.database = this.app.database();
+
+    this.state = {
+      userGlobal: null
+    };
+    this.onChangeUserStatus = this.onChangeUserStatus.bind(this);
   }
 
   componentDidMount() {
+
+    //initial the color for the fullPage.js
     $('#fullpage').fullpage({
       sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe']
     });
   }
-
+  //handle user status changes from <OAuthDiv />
+   onChangeUserStatus(value) {
+     this.setState({
+       userGlobal:value
+     })
+     //console.log(this.state.userGlobal);
+   }
 
   render() {
     return (
     <div id="fullpage">
 
       <div className="section active" id="section1">
-        <OAuthDiv />
+        <OAuthDiv  onChangeUserStatus={this.onChangeUserStatus}/>
       </div>
 
       <div className="section" id="section2">
-        <SnakeGameDiv />
+        <SnakeGameDiv  user={this.state.userGlobal}/>
       </div>
 
       <div className="section" id="section3">

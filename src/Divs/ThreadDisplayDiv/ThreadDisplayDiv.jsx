@@ -44,7 +44,7 @@ class ThreadDisplay extends Component {
         {
           this.state.posts.map((postBody, idx) => {
             return (
-              <Post key={idx} postBody={postBody}/>
+              <Post key={idx} postBody={postBody} />
             )
           })
         }
