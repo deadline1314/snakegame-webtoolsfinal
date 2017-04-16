@@ -38,8 +38,6 @@ class SnakeGameDiv extends Component {
       this.setState({
         score: gs
       });
-      console.log(gs);
-      console.log(this);
       this.props.onChangeGameScore(gs);
       submitFlag = false;
     }

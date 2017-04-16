@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 //import firebase dependency
 import firebase from 'firebase/app';
@@ -9,9 +9,9 @@ import $ from 'jquery';
 import 'fullpage.js';
 
 import './App.css';
-import ThreadDisplay from "./Divs/ThreadDisplayDiv/ThreadDisplayDiv";
 import SnakeGameDiv from './Divs/SnakeGameDiv/SnakeGameDiv';
 import OAuthDiv from './Divs/OAuthDiv/OAuthDiv';
+import RankingList from './Divs/RankingListDiv/RankingListDiv';
 
 class App extends Component {
 
@@ -28,13 +28,34 @@ class App extends Component {
     };
     this.app = firebase.initializeApp(config);
     this.database = this.app.database();
-
+    this.databaseRef = this.database.ref().child('record'); //root url
+    this.queryTop10 = this.databaseRef.orderByChild("score").limitToLast(10);
     this.state = {
       userGlobal: null, // user
-      scoreGlobal: 0   // score to submit to database
+      scoreGlobal: 0,   // score to submit to database
+      rankingList: []
     };
+
     this.onChangeUserStatus = this.onChangeUserStatus.bind(this);
     this.onChangeGameScore = this.onChangeGameScore.bind(this);
+  }
+  componentWillMount() {
+    let temp = [];
+    let self = this;
+
+    this.queryTop10.once("value")
+      .then(function(snap){
+        snap.forEach(function(childSnap) {
+          let childData = childSnap.val();
+          temp.push(childData.score);
+        });
+        return temp;
+      })
+      .then(function(temp){
+        self.setState({
+          rankingList: temp.reverse()
+        })
+      })
   }
 
   componentDidMount() {
@@ -43,43 +64,68 @@ class App extends Component {
       sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe']
     });
   }
+
   //handle user status changes from <OAuthDiv />
-   onChangeUserStatus(value) {
-     this.setState({
-       userGlobal:value
-     })
-   }
-   //handle game score changes from <SnakeGameDiv /> every time the game stopped
-   onChangeGameScore(value) {
+  onChangeUserStatus(value) {
     this.setState({
-      scoreGlobal:value
+      userGlobal: value
+    })
+  }
+
+  //handle game score changes from <SnakeGameDiv /> every time the game stopped
+  onChangeGameScore(value) {
+    this.setState({
+      scoreGlobal: value
     });
-     console.log(this.state.scoreGlobal);
-   }
+    //define the structure of the data
+    let newRecord = {
+      name: this.state.userGlobal.displayName,
+      photo: this.state.userGlobal.photoURL,
+      score: this.state.scoreGlobal,
+      date: new Date().toLocaleString()
+    };
+    //upload data to the firebase
+    this.databaseRef.push().set(newRecord);
+    let temp = [];
+    let self = this;
+    this.queryTop10.once("value")
+      .then(function(snap){
+        snap.forEach(function(childSnap) {
+          let childData = childSnap.val();
+          temp.push(childData.score);
+        });
+        return temp;
+      })
+      .then(function(temp){
+        self.setState({
+          rankingList: temp.reverse()
+        })
+      })
+  }
 
   render() {
     return (
-    <div id="fullpage">
+      <div id="fullpage">
 
-      <div className="section active" id="section1">
-        <OAuthDiv  onChangeUserStatus={this.onChangeUserStatus} />
+        <div className="section active" id="section1">
+          <OAuthDiv onChangeUserStatus={this.onChangeUserStatus}/>
+        </div>
+
+        <div className="section" id="section2">
+          <SnakeGameDiv
+            user={this.state.userGlobal}
+            onChangeGameScore={this.onChangeGameScore}
+          />
+        </div>
+
+        <div className="section" id="section3">
+          <RankingList rankingList={this.state.rankingList} />
+        </div>
       </div>
-
-      <div className="section" id="section2">
-        <SnakeGameDiv
-          user={this.state.userGlobal}
-          onChangeGameScore={this.onChangeGameScore}
-        />
-      </div>
-
-      <div className="section" id="section3">
-        <ThreadDisplay database={this.app.database()} />
-      </div>
-
-    </div>
     );
   }
 }
 
 export default App;
+
 
