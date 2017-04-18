@@ -4,7 +4,6 @@ import './RankingListDiv.css';
 const RankingList = (rankingList) => {
   const newList = [];
   for(let i = 0; i < rankingList.rankingList.length; i++) {
-    //newList.push(<li key={i}>{rankingList.rankingList[i].score}</li>)
     newList.push(
       <tr key={i}>
         <td>{i+1}</td>
