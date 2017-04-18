@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-import UserProfile from './components/UserProfile';
-import UserAction from './components/UserAction';
+import UserProfile from './components/UserProfile/UserProfile';
+import UserAction from './components/UserAction/UserAction';
+import './OAuthDiv.css'
 
 class OAuthDiv extends Component {
 
@@ -28,12 +29,10 @@ class OAuthDiv extends Component {
       if(user) {
         this.setState({user: user});
         this.props.onChangeUserStatus(user);
-        //this.props.user = user;
       }
       else {
         this.setState({user: null});
         this.props.onChangeUserStatus(user);
-        //this.props.user = null;
       }
     })
   }

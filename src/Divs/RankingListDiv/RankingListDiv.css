@@ -1,0 +1,16 @@
+.img-ranking {
+  width: 40px;
+  height: 40px;
+}
+
+.table-ranking {
+  text-align: left;
+  background-color: white;
+}
+
+.title-ranking {
+  font-weight: 800;
+}
+
+
+tr:nth-child(even) {background-color: #f2f2f2}

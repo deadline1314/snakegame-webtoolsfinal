@@ -104,10 +104,10 @@ class SnakeGameDiv extends Component {
   render() {
     return (
       <div className="snakeGame" >
-        <h1>Snake</h1>
-        <button type="button" onClick={this.newGame}>New Game</button>
-        <button type="button" onClick={this.pause}>Pause</button>
-        <p>Score: <span id="score">0</span></p>
+        <h1 className="title-game">HAVE FUN</h1>
+        <button className="btn btn-danger" type="button" onClick={this.newGame}>New Game</button>
+        <button className="btn btn-warning" type="button" onClick={this.pause}>Pause</button>
+        <p className="score-game">Score: <span id="score">0</span></p>
         <Grid fieldTypes={FIELDTYPES} map={this.state.gameState.map}/>
         <p id="txt">Press the 'W','S','A','D' to start.</p>
       </div>)

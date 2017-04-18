@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Login from './Login/Login';
-import Signup from './Signup/Signup';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import './UserAction.css'
 
 class UserAction extends Component {
 
@@ -24,6 +25,7 @@ class UserAction extends Component {
   render() {
     return (
       <div>
+        <h1 className="snake-title">SNAKE GAME</h1>
         {this.state.page === 'Login' && <Login
           onLoginEmailChange={this.props.onLoginEmailChange}
           onLoginPasswordChange={this.props.onLoginPasswordChange}

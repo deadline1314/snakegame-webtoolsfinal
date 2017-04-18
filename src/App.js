@@ -47,7 +47,8 @@ class App extends Component {
       .then(function(snap){
         snap.forEach(function(childSnap) {
           let childData = childSnap.val();
-          temp.push(childData.score);
+          //temp.push(childData.score);
+          temp.push(childData);
         });
         return temp;
       })
@@ -61,7 +62,7 @@ class App extends Component {
   componentDidMount() {
     //initial the color for the fullPage.js
     $('#fullpage').fullpage({
-      sectionsColor: ['#f2f2f2', '#4bbfc3', '#7baabe']
+      sectionsColor: ['#f2f2f2', '#4bbfc3', '#b3d1ff']
     });
   }
 
@@ -92,7 +93,8 @@ class App extends Component {
       .then(function(snap){
         snap.forEach(function(childSnap) {
           let childData = childSnap.val();
-          temp.push(childData.score);
+          //temp.push(childData.score);
+          temp.push(childData);
         });
         return temp;
       })
@@ -107,7 +109,7 @@ class App extends Component {
     return (
       <div id="fullpage">
 
-        <div className="section active" id="section1">
+        <div className="section section-left active" id="section1">
           <OAuthDiv onChangeUserStatus={this.onChangeUserStatus}/>
         </div>
 

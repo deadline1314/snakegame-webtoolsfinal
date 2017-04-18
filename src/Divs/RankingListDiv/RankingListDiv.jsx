@@ -1,16 +1,45 @@
 import React from 'react';
+import './RankingListDiv.css';
 
 const RankingList = (rankingList) => {
-  console.log("----------");
-  console.log(rankingList.rankingList);
   const newList = [];
   for(let i = 0; i < rankingList.rankingList.length; i++) {
-    newList.push(<li key={i}>{rankingList.rankingList[i]}</li>)
+    //newList.push(<li key={i}>{rankingList.rankingList[i].score}</li>)
+    newList.push(
+      <tr key={i}>
+        <td>{i+1}</td>
+        <td>
+          <img className="img-ranking img-circle" src={rankingList.rankingList[i].photo} alt=""/>
+        </td>
+        <td>
+          {rankingList.rankingList[i].name}
+        </td>
+        <td>
+          {rankingList.rankingList[i].score}
+        </td>
+        <td>
+          {rankingList.rankingList[i].date}
+        </td>
+      </tr>)
   }
 
   return(
     <div>
-      <ul>{newList}</ul>
+      <h1 className="title-ranking">TOP 10 RECORD</h1>
+      <table className="table table-ranking">
+        <thead>
+          <tr>
+            <th>Ranking</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {newList}
+        </tbody>
+      </table>
     </div>
   )
 

@@ -16,6 +16,10 @@ h1 {
   text-align: center;
 }
 
+.section-left {
+  text-align: left;
+}
+
 
 .post-editor {
     margin: 1em 20%
