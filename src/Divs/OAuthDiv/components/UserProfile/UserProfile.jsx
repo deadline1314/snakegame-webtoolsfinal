@@ -7,11 +7,17 @@ const UserProfile = ({
 }) => {
   return (
     <div className="card">
-      <img
-        alt="this is a pic"
-        width="100%"
-        src={user.photoURL}
-      />
+      {user.photoURL ?
+        <img
+          alt="this is a pic"
+          width="100%"
+          src={user.photoURL}
+        /> :
+        <img
+          alt="this is a pic"
+          width="100%"
+          src='./pic/user_default.png'
+        />}
       <div>
         <h4>{user.displayName}</h4>
         </div>
