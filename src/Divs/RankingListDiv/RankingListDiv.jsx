@@ -8,10 +8,15 @@ const RankingList = (rankingList) => {
       <tr key={i}>
         <td>{i+1}</td>
         <td>
-          <img className="img-ranking img-circle" src={rankingList.rankingList[i].photo} alt=""/>
+          {rankingList.rankingList[i].photo ?
+            <img className="img-ranking img-circle" src={rankingList.rankingList[i].photo} alt=""/> :
+            <img className="img-ranking img-circle" src="./pic/user_default.png" alt=""/>
+          }
         </td>
         <td>
-          {rankingList.rankingList[i].name}
+          {rankingList.rankingList[i].name ?
+            rankingList.rankingList[i].name : "Anonymous"
+          }
         </td>
         <td>
           {rankingList.rankingList[i].score}

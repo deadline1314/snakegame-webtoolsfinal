@@ -19,7 +19,9 @@ const UserProfile = ({
           src='./pic/user_default.png'
         />}
       <div>
-        <h4>{user.displayName}</h4>
+        {user.displayName ?
+          <h4>{user.displayName}</h4> : <h4>Anonymous</h4>
+        }
         </div>
       <p className="white"><button className="profile-btn" onClick={onLogout}>Logout</button></p>
     </div>
