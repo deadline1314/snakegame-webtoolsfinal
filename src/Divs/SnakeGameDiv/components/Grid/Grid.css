@@ -12,6 +12,7 @@
 
 @media (max-width: 900px) {
   .grid {
+    text-align: center;
     width:70vw;
     height:70vw;
   }

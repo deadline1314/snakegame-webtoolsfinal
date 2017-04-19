@@ -42,12 +42,11 @@ class App extends Component {
   componentWillMount() {
     let temp = [];
     let self = this;
-
+    //initialize ranking list when page load
     this.queryTop10.once("value")
       .then(function(snap){
         snap.forEach(function(childSnap) {
           let childData = childSnap.val();
-          //temp.push(childData.score);
           temp.push(childData);
         });
         return temp;
@@ -85,15 +84,18 @@ class App extends Component {
       score: this.state.scoreGlobal,
       date: new Date().toLocaleString()
     };
+
     //upload data to the firebase
+    //////////////////this is "POST" request
     this.databaseRef.push().set(newRecord);
+    //update ranking list
+    //////////////////this is "GET" request
     let temp = [];
     let self = this;
     this.queryTop10.once("value")
       .then(function(snap){
         snap.forEach(function(childSnap) {
           let childData = childSnap.val();
-          //temp.push(childData.score);
           temp.push(childData);
         });
         return temp;
@@ -103,6 +105,7 @@ class App extends Component {
           rankingList: temp.reverse()
         })
       })
+
   }
 
   render() {
